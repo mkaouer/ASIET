@@ -1,0 +1,142 @@
+DELIMITER $$
+CREATE TRIGGER ModifEmploye AFTER UPDATE ON EMPLOYE FOR EACH ROW
+BEGIN
+	SET @codeEmpl = NEW.codeEmploye;
+	SET @codeAgence = NEW.codeAgence;
+	SET @codeCateg = NEW.codeCategorie;
+	SET @codeTabCategDir= 5;
+	SET @codeDir = 1;
+	
+	
+
+	SELECT codeDirecteur 
+	INTO @codeDir
+	FROM AGENCE 
+	WHERE codeAgence = @codeAgence;
+	
+	
+	
+
+	IF(@codeCateg = @codeTabCategDir) THEN
+		UPDATE AGENCE 
+		SET codeDirecteur = @codeEmpl
+		WHERE codeAgence = @codeAgence;
+	END IF;
+END
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER ModifEmploye AFTER UPDATE ON EMPLOYE FOR EACH ROW
+BEGIN
+	SET @codeEmpl = NEW.codeEmploye;
+	SET @codeAgence = NEW.codeAgence;
+	SET @codeCateg = NEW.codeCategorie;
+	SET @codeTabCategDir= 5;
+	DECLARE @codeDirAgence INTEGER;
+	
+	DECLARE cur1 CURSOR FOR SELECT codeDirecteur
+	FROM AGENCE 
+	WHERE codeAgence = @codeAgence;
+	DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+
+
+	OPEN cur1;
+	FETCH cur1 INTO codeDirAgence;
+	
+	
+
+	IF(@codeCateg = @codeTabCategDir) THEN
+		UPDATE AGENCE 
+		SET codeDirecteur = @codeEmpl
+		WHERE codeAgence = @codeAgence;
+	
+		UPDATE EMPLOYE
+		SET codeCategorie = 1
+		WHERE codeEmploye = @codeDirAgence;
+	END IF;
+END
+$$
+
+DELIMITER $$
+CREATE TRIGGER TRIGAjoutEmploye BEFORE INSERT ON EMPLOYE FOR EACH ROW
+BEGIN
+	SET @codeEmpl = NEW.codeEmploye;
+	SET @codeAgence = NEW.codeAgence;
+	SET @codeCateg = NEW.codeCategorie;
+	SET @codeTabCategDir= 5;
+	
+	SELECT codeDirecteur 
+	INTO @codeDir
+	FROM AGENCE 
+	WHERE codeAgence = @codeAgence;
+	
+	
+	
+
+	IF(@codeCateg = @codeTabCategDir) THEN
+		UPDATE AGENCE 
+		SET codeDirecteur = @codeEmpl
+		WHERE codeAgence = @codeAgence;
+	END IF;
+END
+$$
+DELIMITER;
+
+
+	
+		UPDATE EMPLOYE
+		SET codeCategorie = 1
+		WHERE codeEmploye = @codeEmplDir;
+
+UPDATE EMPLOYE 
+SET codeCategorie = 5, codeAgence = 1
+WHERE codeEmploye = 7
+
+DROP TRIGGER ModifEmploye 
+DROP TRIGGER TRIGAjoutEmploye 
+
+
+448 106
+
+Un employé qui dirige une agence doit forcément appartenir a la categorie directeur (contrainte d'inclusion)
+
+Ne peut pas passer de directeur a autre 
+que si un employé devient directeur
+
+
+
+
+
+
+DELIMITER $$
+CREATE TRIGGER ModifEmploye AFTER UPDATE ON EMPLOYE FOR EACH ROW
+BEGIN
+	
+	DECLARE done INTEGER;
+	DECLARE codeDirAgence INTEGER;
+		
+	DECLARE cur1 CURSOR FOR SELECT codeDirecteur FROM AGENCE WHERE codeAgence = 1;
+	DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+
+
+	OPEN cur1;
+	FETCH cur1 INTO codeDirAgence;
+
+	SET @codeEmpl = NEW.codeEmploye;
+	SET @codeAgence = NEW.codeAgence;
+	SET @codeCateg = NEW.codeCategorie;
+	SET @codeTabCategDir= 5;
+
+	IF(@codeCateg = @codeTabCategDir) THEN
+		UPDATE AGENCE 
+		SET codeDirecteur = @codeEmpl
+		WHERE codeAgence = @codeAgence;
+	
+		UPDATE EMPLOYE
+		SET codeCategorie = 1
+		WHERE codeEmploye = codeDirAgence;
+	END IF;
+	
+END;
+$$

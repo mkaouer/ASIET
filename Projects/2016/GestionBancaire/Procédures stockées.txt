@@ -1,0 +1,114 @@
+CREATE PROCEDURE getLesAgences()
+SELECT * FROM AGENCE
+
+CREATE PROCEDURE villeAgenceClient(IN code INTEGER)
+SELECT villeAgence 
+FROM client , agence
+WHERE client.codeAgence = agence.codeAgence
+and client.codeClient = code
+
+
+
+CREATE PROCEDURE getLesClients()
+SELECT * FROM CLIENT ORDER BY codeClient
+
+CREATE PROCEDURE getLesClientsAgence(IN leCodeAgence INTEGER)
+SELECT * FROM CLIENT WHERE codeAgence = leCodeAgence
+
+CREATE PROCEDURE getUnClient(IN code INTEGER)
+SELECT * FROM CLIENT WHERE codeClient = code
+
+CREATE PROCEDURE getInfosClient(IN code INTEGER)
+SELECT * FROM CLIENT C, CLIENTSOCIETE CS, CLIENTPARTICULIER CP WHERE C.codeClient = CS.codeClient
+								AND C.codeClient = CP.codeClient
+								AND CS.codeClient = CP.codeClient
+								AND C.codeClient = code
+
+CREATE PROCEDURE deleteUnClient(IN code INTEGER)
+DELETE FROM CLIENT WHERE codeClient = code
+
+CREATE PROCEDURE addClient(IN code INTEGER, IN nom VARCHAR(50), IN prenom VARCHAR(50), IN adress VARCHAR(150), IN Cp VARCHAR(6), IN ville VARCHAR(50), IN codeAgence INTEGER)
+INSERT INTO CLIENT VALUES(code, nom, prenom, adress, CP, ville, codeAgence)
+
+
+
+CREATE PROCEDURE getUnClientSOciete(IN code INTEGER)
+SELECT * FROM CLIENTSOCIETE WHERE codeClient = code
+
+CREATE PROCEDURE deleteUneSte(IN code INTEGER)
+DELETE FROM CLIENTSOCIETE WHERE codeClient = code
+
+CREATE PROCEDURE addClientSociete(IN code INTEGER, IN societe VARCHAR(50))
+INSERT INTO CLIENTSOCIETE VALUES(code, societe)
+
+
+
+CREATE PROCEDURE getUnClientParticulier(IN code INTEGER)
+SELECT * FROM CLIENTPARTICULIER WHERE codeClient = code
+
+CREATE PROCEDURE deleteUnParticulier(IN code INTEGER)
+DELETE FROM CLIENTPARTICULIER WHERE codeClient = code
+
+CREATE PROCEDURE addClientParticulier(IN code INTEGER, IN civilite VARCHAR(5))
+INSERT INTO CLIENTPARTICULIER VALUES(code, civilite)
+
+
+
+CREATE PROCEDURE getLesEmployes()
+SELECT * FROM EMPLOYE ORDER BY codeEmploye
+
+CREATE PROCEDURE getUnEmploye(IN code INTEGER)
+SELECT * FROM EMPLOYE WHERE codeEmploye = code
+
+CREATE PROCEDURE getLesEmployeAgence(IN code INTEGER)
+SELECT * FROM EMPLOYE WHERE codeAgence = code
+
+CREATE PROCEDURE getNomDirecteur(IN codeDir INTEGER)
+SELECT nomEmploye FROM EMPLOYE WHERE codeEmploye = codeDir
+
+CREATE PROCEDURE getDirecteur(IN leCodeAgence INTEGER)
+SELECT * FROM EMPLOYE WHERE codeEmploye = (SELECT codeDirecteur FROM AGENCE WHERE codeAgence = leCodeAgence)
+
+CREATE PROCEDURE deleteUnEmployé(IN code INTEGER)
+DELETE FROM EMPLOYE WHERE codeEmploye = code
+
+CREATE PROCEDURE addEmploye(IN code INTEGER, IN nom VARCHAR(50), IN prenom VARCHAR(50), IN adress VARCHAR(150), IN CP VARCHAR(6), IN ville VARCHAR(50), IN codeCategorie INTEGER, IN codeAgence INTEGER)
+INSERT INTO EMPLOYE VALUES(code, nom, prenom, adress, CP, ville, codeCategorie, codeAgence)
+
+CREATE PROCEDURE ModifEmploye(IN code INTEGER,IN codeCat INTEGER, IN codeAg INTEGER)
+UPDATE EMPLOYE SET codeCategorie = codeCat, codeAgence = codeAg
+	       WHERE codeEmploye = code
+
+
+
+CREATE PROCEDURE getLesCategories()
+SELECT * FROM CATEGORIE
+
+
+CREATE PROCEDURE getUnCompteClient(IN code INTEGER, IN num INTEGER)
+SELECT * FROM COMPTE WHERE codeCli = code AND numCompte = num
+
+CREATE PROCEDURE getLesComptesClient(IN code INTEGER)
+SELECT * FROM COMPTE WHERE codeCli = code
+ORDER BY numCompte
+
+CREATE PROCEDURE deleteLesComptesClient(IN code INTEGER)
+DELETE FROM COMPTE WHERE codeCli = code
+
+CREATE PROCEDURE insertCompte(IN numC INTEGER, IN code INTEGER, IN type INTEGER, IN montant FLOAT)
+INSERT INTO COMPTE VALUES(numC, code, type, montant)
+
+CREATE PROCEDURE depotCompte(IN montant FLOAT, IN codeClient INTEGER, IN num INTEGER)
+UPDATE COMPTE SET montantCompte = montantCompte + montant
+		  WHERE codeCli = codeClient
+		  AND numCompte =  num
+
+CREATE PROCEDURE retraitCompte(IN montant FLOAT, IN codeClient INTEGER, IN num INTEGER)
+UPDATE COMPTE SET montantCompte = montantCompte -  montant
+		  WHERE codeCli =  codeClient
+		  AND numCompte =  num
+
+
+
+CREATE PROCEDURE getLesTypesComptes()
+SELECT * FROM TYPECOMPTE

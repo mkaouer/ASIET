@@ -1,0 +1,55 @@
+[PropertyInfo]
+a,Object[],false,false, , ,false,<défaut>
+anglais,JRadioButton,false,false, , ,false,<défaut>
+animal,Bilingue,false,false, , ,false,<défaut>
+arr,ImageIcon,false,false, , ,false,<défaut>
+border1,Border,false,false, , ,false,<défaut>
+border2,Border,false,false, , ,false,<défaut>
+border3,Border,false,false, , ,false,<défaut>
+border4,Border,false,false, , ,false,<défaut>
+btn,ImageIcon,false,false, , ,false,<défaut>
+Choix,ButtonGroup,false,false, , ,false,<défaut>
+data,ArrayList,false,false, , ,false,<défaut>
+fichier,File,false,false, , ,false,<défaut>
+fileChooser,JFileChooser,false,false, , ,false,<défaut>
+firstopen,boolean,false,false, , ,false,<défaut>
+francais,JRadioButton,false,false, , ,false,<défaut>
+graphe,Multilingue,false,false, , ,false,<défaut>
+jBtnModifier,JButton,false,false, , ,false,<défaut>
+jBtnSupp,JButton,false,false, , ,false,<défaut>
+jBtnUpDate,JButton,false,false, , ,false,<défaut>
+jButton1,JButton,false,false, , ,false,<défaut>
+jButton6,JButton,false,false, , ,false,<défaut>
+jButton7,JButton,false,false, , ,false,<défaut>
+jCheckBox1,JCheckBox,false,false, , ,false,<défaut>
+jCheckBox2,JCheckBox,false,false, , ,false,<défaut>
+jCheckBox3,JCheckBox,false,false, , ,false,<défaut>
+jLabel1,JLabel,false,false, , ,false,<défaut>
+jLblIdentificateur,JLabel,false,false, , ,false,<défaut>
+jLblNoeud,JLabel,false,false, , ,false,<défaut>
+jMenuBar1,JMenuBar,false,false, , ,false,<défaut>
+jMenuFile,JMenu,false,false, , ,false,<défaut>
+jMenuFileExit,JMenuItem,false,false, , ,false,<défaut>
+jMenuHelp,JMenu,false,false, , ,false,<défaut>
+jMenuHelpAbout,JMenuItem,false,false, , ,false,<défaut>
+jMenuOuvrir,JMenuItem,false,false, , ,false,<défaut>
+jMenuSave,JMenuItem,false,false, , ,false,<défaut>
+jMenuSaveAs,JMenuItem,false,false, , ,false,<défaut>
+jPanel3,JPanel,false,false, , ,false,<défaut>
+jPaneLang,JPanel,false,false, , ,false,<défaut>
+jTxtIdentificateur,JTextField,false,false, , ,false,<défaut>
+m,Manipulation,false,false, , ,false,<défaut>
+names,String[],false,false, , ,false,<défaut>
+ScrollPane,JScrollPane,false,false, , ,false,<défaut>
+sMod,SaisieInfo,false,false, , ,false,<défaut>
+Table,Tableur,false,false, , ,false,<défaut>
+titledBorder1,TitledBorder,false,false, , ,false,<défaut>
+titledBorder2,TitledBorder,false,false, , ,false,<défaut>
+titledBorder3,TitledBorder,false,false, , ,false,<défaut>
+titledBorder4,TitledBorder,false,false, , ,false,<défaut>
+verticalFlowLayout1,VerticalFlowLayout,false,false, , ,false,<défaut>
+[IconNames]
+
+
+
+

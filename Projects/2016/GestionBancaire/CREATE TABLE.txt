@@ -1,0 +1,81 @@
+CREATE TABLE CATEGORIE(
+codeCategorie integer not null,
+libelleCategorie VARCHAR(200) not null,
+CONSTRAINT pk PRIMARY KEY (codeCategorie));
+
+
+
+CREATE TABLE AGENCE(
+codeAgence integer,
+codeDirecteur integer,
+AdresseAgence VARCHAR(150),
+CPAgence VARCHAR(6),
+villeAgence VARCHAR(50),
+CONSTRAINT pk1 primary key (codeAgence))
+
+
+
+CREATE TABLE EMPLOYE(
+codeEmploye integer not null,
+NomEmploye VARCHAR(40),
+PrenomEmploye VARCHAR(25),
+AdresseEmploye VARCHAR(150),
+CPEmploye VARCHAR(6),
+VilleEmploye VARCHAR(50),
+codeCategorie integer,
+codeAgence integer,
+CONSTRAINT pk1 PRIMARY KEY (codeEmploye),
+CONSTRAINT fk1 FOREIGN KEY (codeCategorie) REFERENCES CATEGORIE(codeCategorie),
+CONSTRAINT fk2 FOREIGN KEY (codeAgence) REFERENCES AGENCE(codeAgence))
+
+ALTER TABLE AGENCE
+ADD CONSTRAINT fk1 FOREIGN KEY (codeDirecteur) REFERENCES EMPLOYE(codeEmploye)
+
+ALTER TABLE EMPLOYE
+ADD CONSTRAINT fk2 FOREIGN KEY (codeAgence) REFERENCES AGENCE(codeAgence)
+
+
+CREATE TABLE CLIENT(
+codeClient integer not null,
+NomClient VARCHAR(50),
+PNomClient VARCHAR(50),
+AdresseClient VARCHAR(150),
+CodePostalClient VARCHAR(6),
+VilleClient VARCHAR(50),
+codeAgence integer not null,
+CONSTRAINT pk PRIMARY KEY (codeClient),
+constraint fk1 Foreign key (codeAgence) REFERENCES AGENCE(codeAgence))
+
+
+
+CREATE TABLE CLIENTPARTICULIER(
+codeClient integer,
+civiliteClient varchar(5),
+CONSTRAINT pk1 PRIMARY KEY (codeClient),
+CONSTRAINT fk1 FOREIGN KEY (codeClient) REFERENCES CLIENT(codeClient))
+
+
+CREATE TABLE CLIENTSOCIETE(
+codeClient integer not null,
+nomSociete varchar(50),
+CONSTRAINT pk1 PRIMARY KEY (codeClient),
+CONSTRAINT fk1 FOREIGN KEY (codeClient) REFERENCES CLIENT(CodeClient))
+
+
+
+CREATE TABLE TYPECOMPTE(
+codeTyp integer not null,
+libelleType VARCHAR(50),
+tauxInteretType FLOAT,
+CONSTRAINT fk PRIMARY KEY (codeTyp)) 
+
+
+
+CREATE TABLE COMPTE(
+numCompte integer not null,
+codeCli integer not null,
+typCompte integer not null,
+montantCompte float,
+CONSTRAINT pk1 PRIMARY KEY(numCompte,codeCli),
+CONSTRAINT fk1 FOREIGN KEY (codeCli) REFERENCES CLIENT(codeClient),
+CONSTRAINT fk2 FOREIGN KEY (typCompte) REFERENCES TYPECOMPTE(codeTyp))

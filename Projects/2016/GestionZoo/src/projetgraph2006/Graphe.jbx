@@ -1,0 +1,9 @@
+[PropertyInfo]
+arrêtes,List,false,false, , ,false,<défaut>
+noeuds,List,false,false, , ,false,<défaut>
+nombreNoeudMax,short,false,false, , ,false,<défaut>
+[IconNames]
+
+
+
+
